@@ -19,20 +19,28 @@ public class EmployeePayrollController {
 
 	@Autowired
 	EmployeePayrollRepository employeePayrollRepository;
+	
+	@Autowired
+	EmployeeService employeeService;
+	@Autowired
+	RoleService roleService;
 
 	@PostMapping("/employee/{empId}/role/{roleName}")
 	public void insertEmployeePayrollDetails(@PathVariable Long empId, @PathVariable String roleName) {
 
-		ResponseEntity<EmployeePayroll> employeeEntity = new RestTemplate()
+		/*
+		 * Removed Resttemplate, for using Feign
+		 * ResponseEntity<EmployeePayroll> employeeEntity = new RestTemplate()
 				.getForEntity("http://localhost:8080/employee/{empId}", EmployeePayroll.class, empId);
 
 		ResponseEntity<EmployeePayroll> roleEntity = new RestTemplate()
-				.getForEntity("http://localhost:8101/role/{roleName}", EmployeePayroll.class, roleName);
+				.getForEntity("http://localhost:8101/role/{roleName}", EmployeePayroll.class, roleName);*/
 
-		EmployeePayroll employeePayroll = employeeEntity.getBody();
-		employeePayroll.setRoleId(roleEntity.getBody().getRoleId());
-		employeePayroll.setRoleName(roleEntity.getBody().getRoleName());
-		employeePayroll.setRoleDescription(roleEntity.getBody().getRoleDescription());
+		EmployeePayroll employeePayroll = employeeService.getEmployeeDetails(empId);
+		EmployeePayroll roleDetail = roleService.getEmployeeRole(roleName);
+		employeePayroll.setRoleId(roleDetail.getRoleId());
+		employeePayroll.setRoleName(roleDetail.getRoleName());
+		employeePayroll.setRoleDescription(roleDetail.getRoleDescription());
 
 		employeePayrollRepository.save(employeePayroll);
 
