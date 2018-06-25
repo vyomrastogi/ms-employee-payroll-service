@@ -31,6 +31,8 @@ public class EmployeePayroll {
 	private String roleName;
 	@Column(name="role_description")
 	private String roleDescription;
+	
+	private int port;
 
 	/**
 	 * 
@@ -155,6 +157,20 @@ public class EmployeePayroll {
 	 */
 	public void setRoleDescription(String roleDescription) {
 		this.roleDescription = roleDescription;
+	}
+
+	/**
+	 * @return the port
+	 */
+	public int getPort() {
+		return port;
+	}
+
+	/**
+	 * @param port the port to set
+	 */
+	public void setPort(int port) {
+		this.port = port;
 	}
 	
 	

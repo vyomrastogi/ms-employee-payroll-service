@@ -26,7 +26,7 @@ public class EmployeePayrollController {
 	RoleService roleService;
 
 	@PostMapping("/employee/{empId}/role/{roleName}")
-	public void insertEmployeePayrollDetails(@PathVariable Long empId, @PathVariable String roleName) {
+	public EmployeePayroll insertEmployeePayrollDetails(@PathVariable Long empId, @PathVariable String roleName) {
 
 		/*
 		 * Removed Resttemplate, for using Feign
@@ -43,6 +43,8 @@ public class EmployeePayrollController {
 		employeePayroll.setRoleDescription(roleDetail.getRoleDescription());
 
 		employeePayrollRepository.save(employeePayroll);
+		
+		return employeePayroll;
 
 	}
 }
