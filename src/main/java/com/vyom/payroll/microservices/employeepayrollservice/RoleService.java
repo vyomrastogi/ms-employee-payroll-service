@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @author Vyom
  *
  */
-@FeignClient(name = "role-service")
+@FeignClient(name = "role-service",url="https://ms-role-service.herokuapp.com")
 @RibbonClient(name = "role-service")
 public interface RoleService {
 
