@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: employee-payroll-service
+server:
+  port: ${PORT:8201}
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl: 
+     defaultZone: https://ms-eureka-server.herokuapp.com/eureka
+  instance:
+    hostname: ms-eureka-server.herokuapp.com
+management:
+  info:
+    env:
+      enabled: true
